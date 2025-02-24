@@ -1107,7 +1107,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834820644
 MonoBehaviour:
@@ -1129,7 +1129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD37C\uD53C\uB775"
+  m_text: "\uD37C\uD53C\uB775\n\uBC15\uC9C0\uD6C8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1da87f5a7f51a40bf2acb1aeebfa8c, type: 2}
   m_sharedMaterial: {fileID: 5818930972016785841, guid: 4f1da87f5a7f51a40bf2acb1aeebfa8c, type: 2}
@@ -1418,7 +1418,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   uIManager: {fileID: 1964557460}
-  dragManager: {fileID: 0}
   gameBoard: {fileID: 256173092}
   colorSprites:
   - {fileID: 21300000, guid: f11a2e90f653942d483aa06189568389, type: 3}
@@ -1618,7 +1617,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -130}
-  m_SizeDelta: {x: 330, y: 130}
+  m_SizeDelta: {x: 330, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1621751149
 MonoBehaviour:

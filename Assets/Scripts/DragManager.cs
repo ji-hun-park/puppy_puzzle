@@ -3,9 +3,15 @@ using UnityEngine.EventSystems;
 
 public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    private Dohyong dohyong;
     private Vector3 _originalPosition;
     private bool _isDragging = false;
 
+    void Start()
+    {
+        dohyong = GetComponent<Dohyong>();
+    }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         _originalPosition = transform.position;
@@ -16,7 +22,9 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         if (_isDragging)
         {
-            transform.position = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, 10f));
+            Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(eventData.position.x, eventData.position.y, Camera.main.nearClipPlane));
+            newPosition.z = transform.position.z; // 원래 Z값 유지
+            transform.position = newPosition;
         }
     }
 
