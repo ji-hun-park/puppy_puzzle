@@ -34,4 +34,9 @@ public class Cell : MonoBehaviour
     {
         spriteRenderer.sprite = GameManager.Instance.colorSprites[(int)cellColor];
     }
+
+    public void CleanCell()
+    {
+        cellColor = 0;
+    }
 }

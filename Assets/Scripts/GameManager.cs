@@ -1,11 +1,20 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        GameStart,
+        GamePlaying,
+        GameEnd
+    }
     // 싱글톤 패턴 적용
     public static GameManager Instance;
+    
+    public GameState gameState = GameState.GameStart;
     public UIManager uIManager;
-    public DragManager dragManager;
+    public GameBoard gameBoard;
     public Sprite[] colorSprites;
 
     private void Awake()
@@ -19,6 +28,24 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject); // 기존에 존재하면 자신파괴
+        }
+    }
+
+    private void Update()
+    {
+        if (gameState == GameState.GameStart)
+        {
+            uIManager.uIList[0].gameObject.SetActive(true);
+            gameBoard.gameObject.SetActive(false);
+        }
+        else if (gameState == GameState.GamePlaying)
+        {
+            uIManager.uIList[0].gameObject.SetActive(false);
+            gameBoard.gameObject.SetActive(true);
+        }
+        else if (gameState == GameState.GameEnd)
+        {
+            
         }
     }
 }
