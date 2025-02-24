@@ -45,7 +45,8 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
 
     private void PlaceBlock()
     {
-        // 블록을 8x8 게임판에 맞게 정렬하고 고정하는 로직 추가
+        // 각 라인 별 블록 확인
+        GameManager.Instance.CheckLines();
         GameManager.Instance.summoned[sumNum] = null;
         Destroy(gameObject);
     }

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         
         int center = raw * 8 + col;
         
-        if (dist >= 1000f || raw == 9 || col == 9 || gameBoard.cellArray[center].cellColor != Cell.CellColor.Light)
+        if (dist >= 800f || raw == 9 || col == 9 || gameBoard.cellArray[center].cellColor != Cell.CellColor.Light)
         {
             return false;
         }
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
                 {
                     return false;
                 }
-
+                // 전부 색칠하기
                 gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
@@ -115,24 +115,90 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center+9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 break;
-            case 1:
+            case 1: // ㅏ 모양
+                if (col-1 < 0 || center + 7 >= 64 || center - 9 < 0) return false;
+                if (gameBoard.cellArray[center + 7].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 9].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 1].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+7].cellColor = (Cell.CellColor)color;
                 break;
-            case 2:
+            case 2: // ㅓ 모양
+                if (col+1 >= 8 || center + 9 >= 64 || center - 7 < 0) return false;
+                if (gameBoard.cellArray[center - 7].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center + 9].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center + 1].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+9].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-7].cellColor = (Cell.CellColor)color;
                 break;
-            case 3:
+            case 3: // ㅣ 모양
                 break;
-            case 4:
+            case 4: // ㅡ 모양
                 break;
-            case 5:
+            case 5: // L 모양
                 break;
-            case 6:
+            case 6: // ㄴ 모양
                 break;
-            case 7:
+            case 7: // 2X2 사각형
                 break;
             default:
                 return false;
         }
         
         return true;
+    }
+
+    public void CheckLines()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            bool pull = true;
+            for (int j = 0; j < 8; j++)
+            {
+                if (gameBoard.cellArray[i*8+j].cellColor == Cell.CellColor.Light) pull = false;
+            }
+
+            if (pull)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    gameBoard.cellArray[i*8+j].cellColor = 0;
+                }
+                ScoreUp();
+            }
+        }
+        
+        for (int i = 0; i < 8; i++)
+        {
+            bool pull = true;
+            for (int j = 0; j < 8; j++)
+            {
+                if (gameBoard.cellArray[j*8+i].cellColor == Cell.CellColor.Light) pull = false;
+            }
+
+            if (pull)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    gameBoard.cellArray[j*8+i].cellColor = 0;
+                }
+                ScoreUp();
+            }
+        }
+    }
+
+    private void ScoreUp()
+    {
+        Debug.Log("ScoreUp");
     }
 }
