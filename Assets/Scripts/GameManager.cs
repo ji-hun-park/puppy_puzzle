@@ -55,7 +55,12 @@ public class GameManager : MonoBehaviour
         }
         else if (gameState == GameState.GameEnd)
         {
-            
+            for (int i = 0; i < summoned.Length; i++)
+            {
+                summoned[i] = null;
+            }
+            gameBoard.gameObject.SetActive(false);
+            summoner.gameObject.SetActive(false);
         }
     }
 }

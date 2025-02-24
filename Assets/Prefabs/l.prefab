@@ -651,6 +651,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: 5
+  cells:
+  - {fileID: 7036078289804901431}
+  - {fileID: 1245313817382085165}
+  - {fileID: 1331511117210981167}
+  - {fileID: 717876296912463656}
 --- !u!114 &5775313902030824051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,6 +668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe500dd1db6b8484b80c8c366cb0efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _originalPosition: {x: 0, y: 0, z: 0}
+  sumNum: 0
 --- !u!61 &8912783723499152040
 BoxCollider2D:
   m_ObjectHideFlags: 0

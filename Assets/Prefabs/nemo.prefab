@@ -1406,6 +1406,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shape: 0
+  cells:
+  - {fileID: 7036078289804901431}
+  - {fileID: 1245313817382085165}
+  - {fileID: 1331511117210981167}
+  - {fileID: 717876296912463656}
+  - {fileID: 3356243147990937673}
+  - {fileID: 231314324357578857}
+  - {fileID: 4409948120457760748}
+  - {fileID: 8494990602151084801}
+  - {fileID: 8412948040104405426}
 --- !u!114 &446123992121812595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,6 +1428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe500dd1db6b8484b80c8c366cb0efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _originalPosition: {x: 0, y: 0, z: 0}
+  sumNum: 0
 --- !u!61 &4787129639394195030
 BoxCollider2D:
   m_ObjectHideFlags: 0
