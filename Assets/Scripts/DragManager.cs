@@ -33,7 +33,7 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     {
         _isDragging = false;
 
-        if (CanPlaceBlock()) // 게임판에 배치 가능 여부 검사
+        if (GameManager.Instance.CanPlaceBlock(transform.position, (int)dohyong.shape, dohyong.cc)) // 게임판에 배치 가능 여부 검사
         {
             PlaceBlock();
         }
@@ -41,12 +41,6 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
         {
             transform.position = _originalPosition; // 원위치로 복귀
         }
-    }
-
-    private bool CanPlaceBlock()
-    {
-        // 블록이 게임판 내에서 유효한 위치에 있는지 확인하는 로직 추가
-        return false;
     }
 
     private void PlaceBlock()

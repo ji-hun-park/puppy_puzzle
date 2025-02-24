@@ -63,4 +63,66 @@ public class GameManager : MonoBehaviour
             summoner.gameObject.SetActive(false);
         }
     }
+
+    public bool CanPlaceBlock(Vector3 checkPositon, int shape, int color)
+    {
+        // 블록이 게임판 내에서 유효한 위치에 있는지 확인하는 로직
+        int num = 0;
+        int col = 9, raw = 9;
+        float dist = 1000000f;
+        foreach (var curCell in gameBoard.cellArray)
+        {
+            if (Vector2.Distance(curCell.transform.position, checkPositon) < dist)
+            {
+                dist = Vector2.Distance(curCell.transform.position, checkPositon);
+                col = num % 8;
+                raw = num / 8;
+            }
+
+            num++;
+        }
+        
+        int center = raw * 8 + col;
+        
+        if (dist >= 500f || raw == 9 || col == 9 || gameBoard.cellArray[center].cellColor != Cell.CellColor.Light)
+        {
+            return false;
+        }
+        
+        switch (shape)
+        {
+            case 0: // 3x3 꽉찬 모양
+                // 테두리 영역 밖 체크
+                if (col - 1 < 0 || col + 1 >= 8 || raw + 1 >= 8 || raw - 1 < 0) return false;
+                // 상화좌우 흰색 체크
+                if (gameBoard.cellArray[center - 1].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center + 1].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center - 8].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center + 8].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                // 꼭짓점 흰색 체크
+                if (gameBoard.cellArray[center - 9].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center + 9].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center - 7].cellColor != Cell.CellColor.Light || gameBoard.cellArray[center + 7].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            default:
+                return false;
+        }
+        
+        return true;
+    }
 }
