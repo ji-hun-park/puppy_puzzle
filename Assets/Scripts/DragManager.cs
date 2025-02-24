@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     private Dohyong dohyong;
-    private Vector3 _originalPosition;
+    public Vector3 _originalPosition;
     private bool _isDragging = false;
+    public int sumNum;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     
     public void OnPointerDown(PointerEventData eventData)
     {
-        _originalPosition = transform.position;
+        //_originalPosition = transform.position;
         _isDragging = true;
     }
 
@@ -45,11 +46,13 @@ public class DragManager : MonoBehaviour, IPointerDownHandler, IDragHandler, IPo
     private bool CanPlaceBlock()
     {
         // 블록이 게임판 내에서 유효한 위치에 있는지 확인하는 로직 추가
-        return true;
+        return false;
     }
 
     private void PlaceBlock()
     {
         // 블록을 8x8 게임판에 맞게 정렬하고 고정하는 로직 추가
+        GameManager.Instance.summoned[sumNum] = null;
+        Destroy(this);
     }
 }

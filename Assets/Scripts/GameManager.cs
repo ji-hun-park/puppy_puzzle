@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public GameState gameState = GameState.GameStart;
     public UIManager uIManager;
     public GameBoard gameBoard;
+    public GameObject summoner;
+    public GameObject[] summoned;
     public Sprite[] colorSprites;
-
+    public GameObject[] shapes;
+    
     private void Awake()
     {
         // Instance 존재 유무에 따라 게임 매니저 파괴 여부 정함
@@ -31,17 +34,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        summoned = new GameObject[3];
+    }
+
     private void Update()
     {
         if (gameState == GameState.GameStart)
         {
             uIManager.uIList[0].gameObject.SetActive(true);
             gameBoard.gameObject.SetActive(false);
+            summoner.gameObject.SetActive(false);
         }
         else if (gameState == GameState.GamePlaying)
         {
             uIManager.uIList[0].gameObject.SetActive(false);
             gameBoard.gameObject.SetActive(true);
+            summoner.gameObject.SetActive(true);
         }
         else if (gameState == GameState.GameEnd)
         {
