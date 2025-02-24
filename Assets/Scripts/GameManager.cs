@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         
         int center = raw * 8 + col;
         
-        if (dist >= 500f || raw == 9 || col == 9 || gameBoard.cellArray[center].cellColor != Cell.CellColor.Light)
+        if (dist >= 1000f || raw == 9 || col == 9 || gameBoard.cellArray[center].cellColor != Cell.CellColor.Light)
         {
             return false;
         }
@@ -104,6 +104,16 @@ public class GameManager : MonoBehaviour
                 {
                     return false;
                 }
+
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+8].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-8].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+7].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-7].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+9].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 break;
             case 1:
                 break;
