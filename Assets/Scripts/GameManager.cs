@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     // 싱글톤 패턴 적용
     public static GameManager Instance;
     
+    public int score;
     public GameState gameState = GameState.GameStart;
     public UIManager uIManager;
     public GameBoard gameBoard;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] summoned;
     public Sprite[] colorSprites;
     public GameObject[] shapes;
+    public IngameUI ingameUI;
     
     private void Awake()
     {
@@ -37,21 +39,34 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         summoned = new GameObject[3];
+        ingameUI = uIManager.uIList[1].GetComponent<IngameUI>();
+        score = 0;
+        ingameUI.scoreTMP.text = score.ToString();
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uIManager.uIList[2].gameObject.SetActive(true);
+        }
+        
         if (gameState == GameState.GameStart)
         {
             uIManager.uIList[0].gameObject.SetActive(true);
+            uIManager.uIList[1].gameObject.SetActive(false);
+            uIManager.uIList[2].gameObject.SetActive(false);
             gameBoard.gameObject.SetActive(false);
             summoner.gameObject.SetActive(false);
+            score = 0;
         }
         else if (gameState == GameState.GamePlaying)
         {
+            uIManager.uIList[1].gameObject.SetActive(true);
             uIManager.uIList[0].gameObject.SetActive(false);
             gameBoard.gameObject.SetActive(true);
             summoner.gameObject.SetActive(true);
+            ingameUI.scoreTMP.text = score.ToString();
         }
         else if (gameState == GameState.GameEnd)
         {
@@ -114,6 +129,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-7].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center+9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
+                score += 9;
                 break;
             case 1: // ㅏ 모양
                 if (col-1 < 0 || center + 7 >= 64 || center - 9 < 0) return false;
@@ -127,6 +143,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center+7].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 2: // ㅓ 모양
                 if (col+1 >= 8 || center + 9 >= 64 || center - 7 < 0) return false;
@@ -140,6 +157,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center+9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-7].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 3: // ㅣ 모양
                 if (raw + 1 >= 8 || raw - 1 < 0 || raw - 2 < 0) return false;
@@ -151,6 +169,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center+8].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-8].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-16].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 4: // ㅡ 모양
                 if (col + 1 >= 8 || col - 1 < 0 || col - 2 < 0) return false;
@@ -162,6 +181,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-2].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 5: // L 모양
                 if (col-1 < 0 || center - 17 < 0 || center - 9 < 0) return false;
@@ -175,6 +195,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-17].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 6: // ㄴ 모양
                 if (col-1 < 0 || col + 1 >= 8 || center - 9 < 0) return false;
@@ -188,6 +209,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             case 7: // 2X2 사각형
                 if (raw-1 < 0 || col - 1 < 0 || center - 9 < 0) return false;
@@ -201,6 +223,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
                 gameBoard.cellArray[center-8].cellColor = (Cell.CellColor)color;
+                score += 4;
                 break;
             default:
                 return false;
@@ -250,6 +273,6 @@ public class GameManager : MonoBehaviour
 
     private void ScoreUp()
     {
-        Debug.Log("ScoreUp");
+        score += 30;
     }
 }
