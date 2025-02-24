@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-17].cellColor = (Cell.CellColor)color;
                 break;
             case 6: // ㄴ 모양
-                if (col-1 < 0 || col + 1 >= 64 || center - 9 < 0) return false;
+                if (col-1 < 0 || col + 1 >= 8 || center - 9 < 0) return false;
                 if (gameBoard.cellArray[center + 1].cellColor != Cell.CellColor.Light ||
                     gameBoard.cellArray[center - 9].cellColor != Cell.CellColor.Light ||
                     gameBoard.cellArray[center - 1].cellColor != Cell.CellColor.Light)
@@ -190,6 +190,17 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
                 break;
             case 7: // 2X2 사각형
+                if (raw-1 < 0 || col - 1 < 0 || center - 9 < 0) return false;
+                if (gameBoard.cellArray[center - 9].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 8].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 1].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-8].cellColor = (Cell.CellColor)color;
                 break;
             default:
                 return false;
