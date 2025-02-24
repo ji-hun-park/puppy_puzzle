@@ -4,7 +4,8 @@ public class GameManager : MonoBehaviour
 {
     // 싱글톤 패턴 적용
     public static GameManager Instance;
-    public UIManager uiManager;
+    public UIManager uIManager;
+    public DragManager dragManager;
     public Sprite[] colorSprites;
 
     private void Awake()
@@ -19,17 +20,5 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // 기존에 존재하면 자신파괴
         }
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
