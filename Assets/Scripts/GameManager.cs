@@ -142,10 +142,39 @@ public class GameManager : MonoBehaviour
                 gameBoard.cellArray[center-7].cellColor = (Cell.CellColor)color;
                 break;
             case 3: // ㅣ 모양
+                if (raw + 1 >= 8 || raw - 1 < 0 || raw - 2 < 0) return false;
+                if (gameBoard.cellArray[center+8].cellColor != 0 || gameBoard.cellArray[center-8].cellColor != 0 || gameBoard.cellArray[center-16].cellColor != 0)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+8].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-8].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-16].cellColor = (Cell.CellColor)color;
                 break;
             case 4: // ㅡ 모양
+                if (col + 1 >= 8 || col - 1 < 0 || col - 2 < 0) return false;
+                if (gameBoard.cellArray[center+1].cellColor != 0 || gameBoard.cellArray[center-1].cellColor != 0 || gameBoard.cellArray[center-2].cellColor != 0)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-2].cellColor = (Cell.CellColor)color;
                 break;
             case 5: // L 모양
+                if (col-1 < 0 || center + 7 >= 64 || center - 9 < 0) return false;
+                if (gameBoard.cellArray[center + 7].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 9].cellColor != Cell.CellColor.Light ||
+                    gameBoard.cellArray[center - 1].cellColor != Cell.CellColor.Light)
+                {
+                    return false;
+                }
+                gameBoard.cellArray[center].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-1].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center-9].cellColor = (Cell.CellColor)color;
+                gameBoard.cellArray[center+7].cellColor = (Cell.CellColor)color;
                 break;
             case 6: // ㄴ 모양
                 break;
