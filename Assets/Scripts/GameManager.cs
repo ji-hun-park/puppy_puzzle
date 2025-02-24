@@ -275,4 +275,12 @@ public class GameManager : MonoBehaviour
     {
         score += 30;
     }
+
+    public void CleanBoard()
+    {
+        for (int i = 0; i < 64; i++)
+        {
+            gameBoard.cellArray[i].cellColor = 0;
+        }
+    }
 }

@@ -15,6 +15,7 @@ public class PauseUI : MonoBehaviour
             Destroy(GameManager.Instance.summoned[i]);
             GameManager.Instance.summoned[i] = null;
         }
+        GameManager.Instance.CleanBoard();
 
         Time.timeScale = 1;
         GameManager.Instance.gameState = GameManager.GameState.GameStart;
