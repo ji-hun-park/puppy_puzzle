@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Cell : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
     public enum Movable
     {
         Move,
@@ -20,5 +22,16 @@ public class Cell : MonoBehaviour
         Yellow,
         Violet,
         Pink
+    }
+    public Movable movable;
+    public CellColor cellColor;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+    void Update()
+    {
+        spriteRenderer.sprite = GameManager.Instance.colorSprites[(int)cellColor];
     }
 }
